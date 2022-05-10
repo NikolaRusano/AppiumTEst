@@ -22,15 +22,15 @@ public class AuthorizationTests extends BaseTestClass {
 
         pause(3000);
 
-        System.out.println("Hey Niger");
+        System.out.println("Hey Ner");
 
         AuthorizationPage pg = new AuthorizationPage();
         pg.tapAndroidElement(pg.skipAuthPageOwnCount);
-        System.out.println("Hey Niger");
+        System.out.println("Hey Nir");
 
 
         /*authTest.tapAndroidElement(authTest.skipAuthPageOwnCount);
-        System.out.println("Hey Niger");
+        System.out.println("Hey Nr");
 
         logger.info("Ввод телефона проверки");
         authTest.sendKeysAndroidElement(authTest.mPhomeInputField ,mPhone);*/

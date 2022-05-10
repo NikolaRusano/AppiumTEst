@@ -1,5 +1,4 @@
 import PageObjects.AuthorizationPage;
-import PageObjects.Helpers.Timeouts;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.remote.MobileCapabilityType;
@@ -35,7 +34,7 @@ public class BaseTestClass {
         dcap.setCapability("appPackage", "ua.silpo.android.mtest"); //platformName
         dcap.setCapability("appActivity", "ua.silpo2.android.ui.activity.MainActivity"); //platformName
 
-        driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), dcap);
+        driver = new AndroidDriver(new URL("http://127.0.0.1:472/wd/hub"), dcap);
 
         return driver;
     }

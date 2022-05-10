@@ -1,6 +1,5 @@
 package PageObjects;
 
-import PageObjects.Helpers.Timeouts;
 import com.epam.reportportal.annotations.Step;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
@@ -13,6 +12,9 @@ import org.openqa.selenium.support.ui.FluentWait;
 
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
+
+import static com.sun.webkit.CursorManager.WAIT;
+import static org.openqa.selenium.remote.ErrorCodes.TIMEOUT;
 
 public class AuthorizationPage {
 
@@ -53,10 +55,10 @@ public class AuthorizationPage {
 
     public void WaitVisibilityOfElement(AndroidElement element) {
 
-        driver.manage().timeouts().implicitlyWait(Timeouts.WAIT, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(WAIT, TimeUnit.SECONDS);
         FluentWait wait = new FluentWait(driver);
-        wait.withTimeout(Duration.ofSeconds(Timeouts.TIMEOUT));
-        wait.pollingEvery(Duration.ofMillis(Timeouts.POLLYNGWAIT));
+        wait.withTimeout(Duration.ofSeconds(TIMEOUT));
+        wait.pollingEvery(Duration.ofMillis(30));
         wait.ignoring(NoSuchElementException.class);
         wait.until(ExpectedConditions.visibilityOf(element));
 
