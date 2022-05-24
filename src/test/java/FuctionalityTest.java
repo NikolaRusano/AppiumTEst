@@ -28,7 +28,7 @@ public class FuctionalityTest {
         //com.android.dialer
         //com.android.dialer/.app.DialtactsActivity
         cap.setCapability("appPackage","com.android.dialer");
-        cap.setCapability("appActivity","com.android.dialer.DialtactsActivity");
+        cap.setCapability("appActivity","com.android.dialer.app.DialtactsActivity");
 
         AndroidDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), cap);
         TouchAction touchAction = new TouchAction(driver);

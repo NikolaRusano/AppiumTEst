@@ -4,11 +4,15 @@ import PageObjects.Helpers.Timeouts;
 import com.epam.reportportal.annotations.Step;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
+import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
@@ -18,11 +22,15 @@ public class BasePageObject {
 
     public AndroidDriver driver;
 
-    public BasePageObject(AndroidDriver driver) throws InterruptedException {
+
+
+
+
+    /*public BasePageObject(AndroidDriver driver) throws InterruptedException {
         Thread.sleep(Timeouts.SLEEP_BEFORE_TEST);
         PageFactory.initElements(driver, this);
         this.driver = driver;
-    }
+    }*/
 
     public void WaitVisibilityOfElement(AndroidElement element) {
 
@@ -33,9 +41,9 @@ public class BasePageObject {
         wait.ignoring(NoSuchElementException.class);
         wait.until(ExpectedConditions.visibilityOf(element));
 
-        if (Timeouts.TIMEOUT > 25 && !isElementPresent(element)){
+        /*if (Timeouts.TIMEOUT > 25 && !isElementPresent(element)){
             Tap_DriverRefresh();
-        }
+        }*/
     }
 
     public static void pause(int ms) {

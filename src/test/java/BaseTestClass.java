@@ -6,6 +6,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
 import java.net.MalformedURLException;
@@ -19,6 +20,7 @@ public class BaseTestClass {
     public AndroidDriver driver;
 
 
+
     public AndroidDriver setCapabilities() throws MalformedURLException {
 
 
@@ -28,15 +30,28 @@ public class BaseTestClass {
         dcap.setCapability(MobileCapabilityType.UDID, "emulator-5554");
         dcap.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android"); //platformName
         dcap.setCapability(MobileCapabilityType.PLATFORM_VERSION, "11.0"); //platformVersion
+        dcap.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
+        /*dcap.setCapability("enableVNC", "true");
+        dcap.setCapability("enableVideo", "false");*/
 
-        pause(2000);
+        dcap.setCapability("appPackage", "ua.fora.android.mtest");
+        dcap.setCapability("appActivity", "ua.fora.android.ui.activity.WelcomeActivity");
+        //dcap.setCapability("appActivity", "ua.fora.android.ui.activity.MainActivity");
+        dcap.setCapability("unicodeKeyboard", "true");
+        dcap.setCapability("skipUnlock", "false");
+        /*dcap.setCapability("resetKeyboard", "true");
+        dcap.setCapability("ensureWebviewsHavePages", "true");
+        dcap.setCapability("newCommandTimeout", "120");
+        dcap.setCapability("nativeWebScreenshot", "true");
+        dcap.setCapability("browserstack.gpsLocation", "50.45466,-30.5238");
+        dcap.setCapability("gpsEnabled", "true");
+        dcap.setCapability("locale", "UA");*/
 
-        dcap.setCapability("appPackage", "ua.silpo.android.mtest"); //platformName
-        dcap.setCapability("appActivity", "ua.silpo2.android.ui.activity.MainActivity"); //platformName
 
-        driver = new AndroidDriver(new URL("http://127.0.0.1:472/wd/hub"), dcap);
-
+        driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), dcap);
         return driver;
+
+
     }
 
     @BeforeMethod(alwaysRun = true)
