@@ -22,7 +22,7 @@ import static org.openqa.selenium.remote.ErrorCodes.TIMEOUT;
 import static testConstants.LoginConstants.mPhone;
 import static testConstants.LoginConstants.otp;
 
-public class AuthorizationPage extends BasePageObject {
+public class AuthorizationPage extends BasePageObject{
 
     private static final Logger logger = LoggerFactory.getLogger(AuthorizationPage.class);
 
@@ -64,6 +64,15 @@ public class AuthorizationPage extends BasePageObject {
 
     @AndroidFindBy(id = "ua.fora.android.mtest:id/snackbar_text")
     public AndroidElement authIncorrectMsgAfter3Input;
+
+    @AndroidFindBy(id = "ua.fora.android.mtest:id/landing_txt_title")
+    public AndroidElement authTopText;
+
+    @AndroidFindBy(id = "ua.fora.android.mtest:id/landing_txt_hint")
+    public AndroidElement authContentText;
+
+    /*@AndroidFindBy(id = "ua.fora.android.mtest:id/tv_skip")
+    public AndroidElement authContentText;*/
 
 
     @Step("Считать текст андроид элемента")

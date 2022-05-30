@@ -1,28 +1,32 @@
-import PageObjects.AuthorizationPage;
 import PageObjects.MainPageMenu;
+import com.google.common.collect.ImmutableMap;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.AndroidElement;
-import io.appium.java_client.android.nativekey.AndroidKey;
-import io.appium.java_client.android.nativekey.KeyEvent;
-import io.appium.java_client.touch.TapOptions;
-import io.appium.java_client.touch.offset.ElementOption;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Pause;
+import org.openqa.selenium.interactions.PointerInput;
+import org.openqa.selenium.interactions.Sequence;
+import org.openqa.selenium.remote.RemoteWebElement;
+import org.openqa.selenium.remote.http.HttpMethod;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
+import static java.time.Duration.ofMillis;
+import static java.util.Collections.singletonList;
+import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
 import static testConstants.LoginConstants.mPhone;
 import static testConstants.LoginConstants.otp;
 
 public class AuthorizationTests extends BaseTestClass {
+
 
     private static final Logger logger = LoggerFactory.getLogger(AuthorizationTests.class);
 
@@ -30,12 +34,75 @@ public class AuthorizationTests extends BaseTestClass {
     public void Authtest1() {
 
         MainPageMenu mPgM = new MainPageMenu(driver);
+        AppiumDriver ad = new AppiumDriver((Capabilities) driver);
+
+        Assert.assertEquals(mPgM.authTopText.getText(),"Картка Фора club");
+        Assert.assertEquals(mPgM.authContentText.getText(),"Електронна картка завжди під рукою. Прощавайте, зайвий пластик та папір!");
+
+       /* MobileElement source = (MobileElement) new WebDriverWait(driver, 30)
+                .until(elementToBeClickable(MobileBy.AccessibilityId("slider")));
+        driver.addCommand(HttpMethod.POST, String.format("/session/%s/plugin/actions/swipe", driver.getSessionId()), "swipe");
+        driver.execute("swipe", ImmutableMap.of("elementId", source.getId(), "percentage", 50));
+*/
+        /*MobileElement slider = (MobileElement) driver.findElementByAccessibilityId("slider");
+        Point source = slider.getLocation();
+        PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+        Sequence sequence = new Sequence(finger, 1);
+        sequence.addAction(finger.createPointerMove(ofMillis(0),
+                PointerInput.Origin.viewport(), source.x, source.y));
+        sequence.addAction(finger.createPointerDown(PointerInput.MouseButton.MIDDLE.asArg()));
+        sequence.addAction(new Pause(finger, ofMillis(200)));
+        sequence.addAction(finger.createPointerMove(ofMillis(200),
+                PointerInput.Origin.viewport(), source.x + 100, source.y));
+        sequence.addAction(finger.createPointerUp(PointerInput.MouseButton.MIDDLE.asArg()));
+        driver.perform(singletonList(sequence));*/
+
+        //AppiumDriver appiumDriver = new AppiumDriver();
+
+
+        //TouchAction ta = new TouchAction(driver);
+
+        ad.
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        HashMap<String, String> scrollObject = new HashMap<String, String>();
+        scrollObject.put("direction", "down");
+        scrollObject.put("element", ((RemoteWebElement) mPgM.authContentText).getId());
+        js.executeScript("mobile: scroll", scrollObject);
+
+        /*driver.context("NATIVE_APP");
+        Dimension size = driver.manage().window().getSize();
+        int startx = (int) (size.width * 0.8);
+        int endx = (int) (size.width * 0.20);
+        int starty = size.height / 2;
+        driver.(startx, starty, endx, starty, 1000);*/
+
 
         pause(3000);
-
-        mPgM.authBeforeTestWithTestNumbAndOtp();
+        //mPgM.skipAuthPageOwnCount.click()
+        //mPgM.authBeforeTestWithTestNumbAndOtp();
 
         Assert.assertTrue(mPgM.isElementPresent(mPgM.bottomBarMainBtn));
+        //typeAct =1;
+    }
+
+
+
+
+    @Test(description = "Test Authorization", priority = 1)
+    public void AuthtestFirstDisplay() {
+
+        MainPageMenu mPgM = new MainPageMenu(driver);
+
+
+        ;
+
+
+
+
+       // mPgM.authBeforeTestWithTestNumbAndOtp();
+
+        //Assert.assertTrue(mPgM.isElementPresent(mPgM.bottomBarMainBtn));
 
     }
 

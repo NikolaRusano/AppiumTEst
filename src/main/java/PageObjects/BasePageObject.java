@@ -41,9 +41,6 @@ public class BasePageObject {
         wait.ignoring(NoSuchElementException.class);
         wait.until(ExpectedConditions.visibilityOf(element));
 
-        /*if (Timeouts.TIMEOUT > 25 && !isElementPresent(element)){
-            Tap_DriverRefresh();
-        }*/
     }
 
     public static void pause(int ms) {

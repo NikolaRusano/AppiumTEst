@@ -14,7 +14,18 @@ public class DeliveryPage extends MainPageMenu{
         super(driver);
     }
 
-    @AndroidFindBy(id = "ua.fora.android.mtest:id/bottom_navigation")
-    public AndroidElement bottomBarNavigationLine;
+    @AndroidFindBy(xpath = "//android.widget.FrameLayout[@content-desc=\"Доставка\"]/android.widget.ImageView")
+    public AndroidElement bottomBarNavigationLineDelivery;
+
+    @AndroidFindBy(xpath = "//androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout[1]/android.view.ViewGroup")
+    public AndroidElement deliveryTypePar;
+
+    @AndroidFindBy(xpath = "//androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout[2]/android.view.ViewGroup")
+    public AndroidElement pickupTypePar;
+
+    @AndroidFindBy(xpath = "ua.fora.android.mtest:id/button_confirm")
+    public AndroidElement confirmBtn;
+
+
 
 }

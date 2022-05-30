@@ -1,4 +1,6 @@
+import PageObjects.DeliveryPage;
 import PageObjects.MainPageMenu;
+import org.openqa.selenium.By;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -9,18 +11,20 @@ public class DeliveryTests extends BaseTestClass{
         private static final Logger logger = LoggerFactory.getLogger(AuthorizationTests.class);
 
         @Test(description = "Test delivery", priority = 1)
-        public void Delivery() {
+        public void deliveryTest() {
 
-            //AuthorizationPage pg = new AuthorizationPage(driver);
-            MainPageMenu mPgM = new MainPageMenu(driver);
+            DeliveryPage dP = new DeliveryPage(driver);
 
             pause(3000);
 
-            mPgM.authBeforeTestWithTestNumbAndOtp();
+            logger.info("Авторизация");
+            dP.authBeforeTestWithTestNumbAndOtp();
 
-            Assert.assertTrue(mPgM.isElementPresent(mPgM.bottomBarMainBtn));
 
+            dP.bottomBarNavigationLineDelivery.click();
+            dP.confirmBtn.click();
 
+            
         }
 
 }
