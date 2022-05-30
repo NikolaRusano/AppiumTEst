@@ -2,6 +2,7 @@ package PageObjects;
 
 import PageObjects.Helpers.Timeouts;
 import com.epam.reportportal.annotations.Step;
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.remote.MobileCapabilityType;
@@ -20,7 +21,7 @@ import static java.lang.Thread.sleep;
 
 public class BasePageObject {
 
-    public AndroidDriver driver;
+    public AppiumDriver driver;
 
 
 

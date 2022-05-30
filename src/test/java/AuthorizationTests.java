@@ -64,11 +64,11 @@ public class AuthorizationTests extends BaseTestClass {
 
         ad.
 
-        JavascriptExecutor js = (JavascriptExecutor) driver;
+       /* JavascriptExecutor js = (JavascriptExecutor) driver;
         HashMap<String, String> scrollObject = new HashMap<String, String>();
         scrollObject.put("direction", "down");
         scrollObject.put("element", ((RemoteWebElement) mPgM.authContentText).getId());
-        js.executeScript("mobile: scroll", scrollObject);
+        js.executeScript("mobile: scroll", scrollObject);*/
 
         /*driver.context("NATIVE_APP");
         Dimension size = driver.manage().window().getSize();
