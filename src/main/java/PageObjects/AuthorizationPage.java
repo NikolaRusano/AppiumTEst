@@ -1,12 +1,18 @@
 package PageObjects;
 
 import com.epam.reportportal.annotations.Step;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -71,8 +77,8 @@ public class AuthorizationPage extends BasePageObject{
     @AndroidFindBy(id = "ua.fora.android.mtest:id/landing_txt_hint")
     public AndroidElement authContentText;
 
-    /*@AndroidFindBy(id = "ua.fora.android.mtest:id/tv_skip")
-    public AndroidElement authContentText;*/
+    @AndroidFindBy(id = "ua.fora.android.mtest:id/tv_main")
+    public AndroidElement authFirstScreensNextBtn;
 
 
     @Step("Считать текст андроид элемента")
@@ -196,6 +202,28 @@ public class AuthorizationPage extends BasePageObject{
     @Step("Обновить страницу для проверки результата")
     public void Tap_DriverRefresh() {
         driver.navigate().refresh();
+        pause(3000);
+
+    }
+
+    @Step("Горизонтальный свайп экрана")
+    public void testHorizontalSwipe() {
+        MobileElement activeScreen = (MobileElement) driver.findElement(By.id("ua.fora.android.mtest:id/pager"));
+
+        Dimension dimension = activeScreen.getSize();
+        int vertical = activeScreen.getSize().getHeight()/2;
+
+        Double startSwipe = dimension.getWidth()*0.9;
+        int horizontalStart = startSwipe.intValue();
+
+        Double endSwipe = dimension.getWidth()*0.1;
+        int horizontalEnd = endSwipe.intValue();
+
+        new TouchAction(driver)
+                .press(PointOption.point(horizontalStart,vertical))
+                .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(1)))
+                .moveTo(PointOption.point(horizontalEnd,vertical))
+                .release().perform();
         pause(3000);
 
     }

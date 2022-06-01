@@ -21,7 +21,7 @@ import static java.lang.Thread.sleep;
 
 public class BasePageObject {
 
-    public AppiumDriver driver;
+    public AndroidDriver driver;
 
 
 

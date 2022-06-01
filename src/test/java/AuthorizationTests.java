@@ -34,56 +34,34 @@ public class AuthorizationTests extends BaseTestClass {
     public void Authtest1() {
 
         MainPageMenu mPgM = new MainPageMenu(driver);
-        AppiumDriver ad = new AppiumDriver((Capabilities) driver);
+        //AppiumDriver ad = new AppiumDriver((Capabilities) driver);
 
+        logger.info("Проверка первого слайда кнопки и текста сообщений окна");
+        Assert.assertTrue(mPgM.isElementPresent(mPgM.skipAuthPageOwnCount),"Проверка наличия кнопки пропустить");
         Assert.assertEquals(mPgM.authTopText.getText(),"Картка Фора club");
         Assert.assertEquals(mPgM.authContentText.getText(),"Електронна картка завжди під рукою. Прощавайте, зайвий пластик та папір!");
 
-       /* MobileElement source = (MobileElement) new WebDriverWait(driver, 30)
-                .until(elementToBeClickable(MobileBy.AccessibilityId("slider")));
-        driver.addCommand(HttpMethod.POST, String.format("/session/%s/plugin/actions/swipe", driver.getSessionId()), "swipe");
-        driver.execute("swipe", ImmutableMap.of("elementId", source.getId(), "percentage", 50));
-*/
-        /*MobileElement slider = (MobileElement) driver.findElementByAccessibilityId("slider");
-        Point source = slider.getLocation();
-        PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-        Sequence sequence = new Sequence(finger, 1);
-        sequence.addAction(finger.createPointerMove(ofMillis(0),
-                PointerInput.Origin.viewport(), source.x, source.y));
-        sequence.addAction(finger.createPointerDown(PointerInput.MouseButton.MIDDLE.asArg()));
-        sequence.addAction(new Pause(finger, ofMillis(200)));
-        sequence.addAction(finger.createPointerMove(ofMillis(200),
-                PointerInput.Origin.viewport(), source.x + 100, source.y));
-        sequence.addAction(finger.createPointerUp(PointerInput.MouseButton.MIDDLE.asArg()));
-        driver.perform(singletonList(sequence));*/
+        mPgM.testHorizontalSwipe();logger.info("Проверка первого слайда кнопки и текста сообщений окна");
 
-        //AppiumDriver appiumDriver = new AppiumDriver();
+        Assert.assertTrue(mPgM.isElementPresent(mPgM.skipAuthPageOwnCount),"Проверка наличия кнопки пропустить");
+        Assert.assertEquals(mPgM.authTopText.getText(),"Бонуси та персональні пропозиції");
+        Assert.assertEquals(mPgM.authContentText.getText(),"Усі бали, бонуси та персональні пропозиції відтепер у додатку.");
 
+        mPgM.testHorizontalSwipe();
 
-        //TouchAction ta = new TouchAction(driver);
+        Assert.assertTrue(mPgM.isElementPresent(mPgM.skipAuthPageOwnCount),"Проверка наличия кнопки пропустить");
+        Assert.assertEquals(mPgM.authTopText.getText(),"Акції");
+        Assert.assertEquals(mPgM.authContentText.getText(),"Тут щотижня оновлюються акції Фора. Плануйте покупки та заощаджуйте.");
 
-        ad.
+        mPgM.testHorizontalSwipe();
 
-       /* JavascriptExecutor js = (JavascriptExecutor) driver;
-        HashMap<String, String> scrollObject = new HashMap<String, String>();
-        scrollObject.put("direction", "down");
-        scrollObject.put("element", ((RemoteWebElement) mPgM.authContentText).getId());
-        js.executeScript("mobile: scroll", scrollObject);*/
-
-        /*driver.context("NATIVE_APP");
-        Dimension size = driver.manage().window().getSize();
-        int startx = (int) (size.width * 0.8);
-        int endx = (int) (size.width * 0.20);
-        int starty = size.height / 2;
-        driver.(startx, starty, endx, starty, 1000);*/
+        Assert.assertFalse(mPgM.isElementPresent(mPgM.skipAuthPageOwnCount),"Проверка наличия кнопки пропустить");
+        Assert.assertEquals(mPgM.authTopText.getText(),"Оплата платіжною карткою");
+        Assert.assertEquals(mPgM.authContentText.getText(),"Сплачуй за покупки та отримуй додаткову винагороду");
+        Assert.assertTrue(mPgM.isElementPresent(mPgM.authFirstScreensNextBtn),"Проверка наличия кнопки Далее");
 
 
-        pause(3000);
-        //mPgM.skipAuthPageOwnCount.click()
-        //mPgM.authBeforeTestWithTestNumbAndOtp();
 
-        Assert.assertTrue(mPgM.isElementPresent(mPgM.bottomBarMainBtn));
-        //typeAct =1;
     }
 
 
