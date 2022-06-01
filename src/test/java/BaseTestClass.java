@@ -16,46 +16,12 @@ public class BaseTestClass {
     public AndroidDriver driver;
 
 
-
-    /*public AndroidDriver setCapabilities() throws MalformedURLException {
-
-
-       DesiredCapabilities dcap = new DesiredCapabilities();
-
-        dcap.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel_4_API_30");
-        dcap.setCapability(MobileCapabilityType.UDID, "emulator-5554");
-        dcap.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android"); //platformName
-        dcap.setCapability(MobileCapabilityType.PLATFORM_VERSION, "11.0"); //platformVersion
-        dcap.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
-        *//*dcap.setCapability("enableVNC", "true");
-        dcap.setCapability("enableVideo", "false");*//*
-
-        dcap.setCapability("appPackage", "ua.fora.android.mtest");
-        dcap.setCapability("appActivity", "ua.fora.android.ui.activity.WelcomeActivity");
-        //dcap.setCapability("appActivity", "ua.fora.android.ui.activity.MainActivity");
-        dcap.setCapability("unicodeKeyboard", "true");
-        dcap.setCapability("skipUnlock", "false");
-        *//*dcap.setCapability("resetKeyboard", "true");
-        dcap.setCapability("ensureWebviewsHavePages", "true");
-        dcap.setCapability("newCommandTimeout", "120");
-        dcap.setCapability("nativeWebScreenshot", "true");
-        dcap.setCapability("browserstack.gpsLocation", "50.45466,-30.5238");
-        dcap.setCapability("gpsEnabled", "true");
-        dcap.setCapability("locale", "UA");*//*
-
-
-        driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), dcap);
-        return driver;
-
-
-    }*/
-
     public AndroidDriver setCapabilitiesRandActinity() throws MalformedURLException {
 
 
        DesiredCapabilities dcap = new DesiredCapabilities();
 
-        dcap.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel_4_API_30");
+        dcap.setCapability(MobileCapabilityType.DEVICE_NAME, "NickTestDevice");
         dcap.setCapability(MobileCapabilityType.UDID, "emulator-5554");
         dcap.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android"); //platformName
         dcap.setCapability(MobileCapabilityType.PLATFORM_VERSION, "11.0"); //platformVersion
@@ -65,6 +31,7 @@ public class BaseTestClass {
         dcap.setCapability("appPackage", "ua.fora.android.mtest");
         //dcap.setCapability("appActivity", "ua.fora.android.ui.activity.WelcomeActivity");
         dcap.setCapability("appActivity", "ua.fora.android.ui.activity.SplashActivity");
+        //dcap.setCapability("appActivity", "ua.fora.android.ui.activity.NexusLauncherActivity");
         dcap.setCapability("unicodeKeyboard", "true");
         dcap.setCapability("skipUnlock", "false");
 

@@ -54,9 +54,6 @@ public class AuthorizationPage extends BasePageObject{
     public AndroidElement checkboc18Years;
 
     @AndroidFindBy(id = "ua.fora.android.mtest:id/button_ok")
-    public AndroidElement getCodeBtn;
-
-    @AndroidFindBy(id = "ua.fora.android.mtest:id/button_ok")
     public AndroidElement finishAuthOKBtn;
 
     @AndroidFindBy(id = "ua.fora.android.mtest:id/action_menu")
@@ -79,6 +76,27 @@ public class AuthorizationPage extends BasePageObject{
 
     @AndroidFindBy(id = "ua.fora.android.mtest:id/tv_main")
     public AndroidElement authFirstScreensNextBtn;
+
+    @AndroidFindBy(id = "ua.fora.android.mtest:id/text_info_number_vr")
+    public AndroidElement authPageCardNumbInput;
+
+    @AndroidFindBy(id = "ua.fora.android.mtest:id/edit_card")
+    public AndroidElement authCardNumbInputField;
+
+    @AndroidFindBy(id = "ua.fora.android.mtest:id/text_info_card")
+    public AndroidElement authCardNumbInputFieldTextInfo;
+
+    @AndroidFindBy(id = "ua.fora.android.mtest:id/text_no_card")
+    public AndroidElement authNoCardInfiLink;
+
+    @AndroidFindBy(id = "ua.fora.android.mtest:id/textinput_error")
+    public AndroidElement authPhoneInputFieldError;
+
+    @AndroidFindBy(id = "ua.fora.android.mtest:id/snackbar_text")
+    public AndroidElement authPushMsgError;
+
+    @AndroidFindBy(id = "ua.fora.android.mtest:id/button_send_again")
+    public AndroidElement authSendCodeAgainLinkBtn;
 
 
     @Step("Считать текст андроид элемента")
@@ -171,7 +189,6 @@ public class AuthorizationPage extends BasePageObject{
     public void sendKeysAndroidElementOtpCodeInt() {
         int[] numArr = {0, 0, 1, 2};
         for (int item : numArr) {
-            ;
             otpCodeField.click();
             otpCodeField.sendKeys(String.valueOf(item));
         }
@@ -231,16 +248,18 @@ public class AuthorizationPage extends BasePageObject{
     @Step("Авторизация перед тестом")
     public void authBeforeTestWithTestNumbAndOtp() {
 
+        logger.info("Клик кнопки пропустить");
+        tapAndroidElement(skipAuthPageOwnCount);
+
         logger.info("Клик чекбокса - мені є 18 років");
         tapAndroidElement(checkboc18Years);
-
 
         logger.info("Ввод телефона проверки");
         tapAndroidElement(mPhomeInputField);
         sendKeysAndroidElement(mPhomeInputField ,mPhone);
 
         logger.info("Клик получить отп код");
-        tapAndroidElement(getCodeBtn);
+        tapAndroidElement(finishAuthOKBtn);
 
         logger.info("Ввод отп кода тест");
         sendKeysAndroidElementOtpCode(otp);

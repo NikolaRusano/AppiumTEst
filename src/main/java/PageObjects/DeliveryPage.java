@@ -17,7 +17,8 @@ public class DeliveryPage extends MainPageMenu{
     @AndroidFindBy(xpath = "//android.widget.FrameLayout[@content-desc=\"Доставка\"]/android.widget.ImageView")
     public AndroidElement bottomBarNavigationLineDelivery;
 
-    @AndroidFindBy(xpath = "//androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout[1]/android.view.ViewGroup")
+
+    @AndroidFindBy(id = "ua.fora.android.mtest:id/tv_payment_question")
     public AndroidElement deliveryTypePar;
 
     @AndroidFindBy(xpath = "//androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout[2]/android.view.ViewGroup")

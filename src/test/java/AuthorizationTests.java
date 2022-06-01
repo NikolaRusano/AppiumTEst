@@ -65,34 +65,62 @@ public class AuthorizationTests extends BaseTestClass {
     }
 
 
-
-
-    @Test(description = "Test Authorization", priority = 1)
-    public void AuthtestFirstDisplay() {
+    @Test(description = "Test Authorization", priority = 2)
+    public void Authtest2InputIncorrectPhone() {
 
         MainPageMenu mPgM = new MainPageMenu(driver);
 
+        logger.info("Клик кнопки пропустить");
+        mPgM.tapAndroidElement(mPgM.skipAuthPageOwnCount);
 
-        ;
+        logger.info("Клик чекбокса - мені є 18 років");
+        mPgM.tapAndroidElement(mPgM.checkboc18Years);
 
+        logger.info("Ввод телефона проверки");
+        mPgM.tapAndroidElement(mPgM.mPhomeInputField);
+        mPgM.sendKeysAndroidElement(mPgM.mPhomeInputField, "050122135");
 
+        Assert.assertEquals(mPgM.authPhoneInputFieldError.getText(),
+                "Некоректний код мобільного оператора");
 
+        logger.info("Ввод телефона проверки");
+        mPgM.cleanField("050122135".length());
+        mPgM.tapAndroidElement(mPgM.mPhomeInputField);
+        mPgM.sendKeysAndroidElement(mPgM.mPhomeInputField, "989610149");
+        mPgM.tapAndroidElement(mPgM.finishAuthOKBtn);
 
-       // mPgM.authBeforeTestWithTestNumbAndOtp();
+        logger.info("Проверка пуш сообщения");
+        mPgM.tapAndroidElement(mPgM.authSendCodeAgainLinkBtn);
+        pause(1000);
+        Assert.assertEquals(mPgM.authPushMsgError.getText(),
+                "Код підтвердження надіслано");
 
-        //Assert.assertTrue(mPgM.isElementPresent(mPgM.bottomBarMainBtn));
+        mPgM.tapAndroidElement(mPgM.authSendCodeAgainLinkBtn);
+        pause(1000);
+        Assert.assertEquals(mPgM.authPushMsgError.getText(),
+                "Код підтвердження надіслано");
 
+        mPgM.tapAndroidElement(mPgM.authSendCodeAgainLinkBtn);
+        pause(1000);
+
+        logger.info("Проверка что после 3 нажатий на нопку не оримали код - переходит на ввод телефона и получается пуш сообщение");
+        Assert.assertTrue(mPgM.isElementPresent((mPgM.mPhomeInputField)));
+        Assert.assertEquals(mPgM.authPushMsgError.getText(),
+                "Ви вичерпали можливість відправки коду підтвердження. Спробуйте через 30 хвилин");
     }
 
-    @Test(description = "Тестирование количества введеных символов", priority = 2)
-    public void Authtest2() {
+    @Test(description = "Тестирование количества введеных символов", priority = 3)
+    public void Authtest3ButtonActivityNumbChars() {
         MainPageMenu mPgM = new MainPageMenu(driver);
+
+        logger.info("Клик кнопки пропустить");
+        mPgM.tapAndroidElement(mPgM.skipAuthPageOwnCount);
 
         logger.info("Клик чекбокса - мені є 18 років");
         mPgM.tapAndroidElement(mPgM.checkboc18Years);
 
         logger.info("Проверка при чекнутом чекбоксе - 18 років кнопка отправить код не активна");
-        Assert.assertFalse(mPgM.getCodeBtn.isEnabled());
+        Assert.assertFalse(mPgM.finishAuthOKBtn.isEnabled());
 
         logger.info("Клик анчек чекбокса - мені є 18 років");
         mPgM.tapAndroidElement(mPgM.checkboc18Years);
@@ -102,7 +130,7 @@ public class AuthorizationTests extends BaseTestClass {
         mPgM.sendKeysAndroidElement(mPgM.mPhomeInputField, "989610140");
 
         logger.info("Проверка при анчекнутом чекбоксе - 18 років и введенном номере телефона кнопка отправить код не активна");
-        Assert.assertFalse(mPgM.getCodeBtn.isEnabled());
+        Assert.assertFalse(mPgM.finishAuthOKBtn.isEnabled());
 
         logger.info("Оистка поля  ввода телефона");
         mPgM.cleanField("989610140".length());
@@ -114,7 +142,7 @@ public class AuthorizationTests extends BaseTestClass {
         mPgM.tapAndroidElement(mPgM.mPhomeInputField);
         mPgM.sendKeysAndroidElement(mPgM.mPhomeInputField, mPhone.substring(0, mPhone.length() - 1));
 
-        Assert.assertFalse(mPgM.getCodeBtn.isEnabled());
+        Assert.assertFalse(mPgM.finishAuthOKBtn.isEnabled());
 
         logger.info("Очистка поля  ввода телефона");
         mPgM.cleanField("989610140".length());
@@ -124,7 +152,7 @@ public class AuthorizationTests extends BaseTestClass {
         mPgM.sendKeysAndroidElement(mPgM.mPhomeInputField, mPhone);
 
         logger.info("Клик получить отп код");
-        mPgM.tapAndroidElement(mPgM.getCodeBtn);
+        mPgM.tapAndroidElement(mPgM.finishAuthOKBtn);
 
         logger.info("Ввод отп кода тест - менше на 1 символ и проверка активации кнопки");
         mPgM.sendKeysAndroidElementOtpCode("000");
@@ -156,10 +184,13 @@ public class AuthorizationTests extends BaseTestClass {
 
     }
 
-    @Test(description = "Тестирование неверного кода отп и количества попыток", priority = 1)
-    public void Authtest3() {
+    @Test(description = "Тестирование неверного кода отп и количества попыток", priority = 4)
+    public void AuthtestOTPCodeErrorsInput() {
         MainPageMenu mPgM = new MainPageMenu(driver);
         String testNumber = "989615140";
+
+        logger.info("Клик кнопки пропустить");
+        mPgM.tapAndroidElement(mPgM.skipAuthPageOwnCount);
 
         logger.info("Клик чекбокса - мені є 18 років");
         mPgM.tapAndroidElement(mPgM.checkboc18Years);
@@ -169,7 +200,7 @@ public class AuthorizationTests extends BaseTestClass {
         mPgM.sendKeysAndroidElement(mPgM.mPhomeInputField, testNumber);
 
         logger.info("Клик получить отп код");
-        mPgM.tapAndroidElement(mPgM.getCodeBtn);
+        mPgM.tapAndroidElement(mPgM.finishAuthOKBtn);
 
         logger.info("Ввод отп кода тест - 1 попытка");
         mPgM.sendKeysAndroidElementOtpCode("1123");
@@ -230,7 +261,7 @@ public class AuthorizationTests extends BaseTestClass {
         mPgM.sendKeysAndroidElement(mPgM.mPhomeInputField, testNumber);
 
         logger.info("Клик получить отп код");
-        mPgM.tapAndroidElement(mPgM.getCodeBtn);
+        mPgM.tapAndroidElement(mPgM.finishAuthOKBtn);
 
         Assert.assertEquals(mPgM.authIncorrectMsgAfter3Input.getText()
                 ,"Ви вичерпали можливість відправки коду підтвердження. Спробуйте через 30 хвилин");
@@ -238,34 +269,7 @@ public class AuthorizationTests extends BaseTestClass {
 
     }
 
-    @Test(description = "Test StartMenu", priority = 2)
-    public void StartMenu() {
-
-        MainPageMenu mPgM = new MainPageMenu(driver);
-
-        pause(3000);
-
-        mPgM.authBeforeTestWithTestNumbAndOtp();
-
-        logger.info("Проверка элементов нижней ленты навигации");
-        /*Assert.assertEquals(mPgM.bottomBarMainBtn.getText(),"Головна");
-        Assert.assertEquals(mPgM.bottomBarDeliveryBtn.getText(),"Доставка");
-        Assert.assertEquals(mPgM.bottomBarForaClubBtn.getText(),"Фора club");
-        Assert.assertEquals(mPgM.bottomBarHistoryBtn.getText(),"Історія");
-        Assert.assertEquals(mPgM.bottomBarMenuBtn.getText(),"Меню");*/
-
-        List<String> listItemsToCheck = Arrays.asList("Головна", "Доставка", "Історія", "Меню");
-        List<MobileElement> listelements = mPgM.bottomBarNavigationLine.findElements(By.id("ua.fora.android.mtest:id/smallLabel"));
-        MobileElement mainElemBottom = (MobileElement) driver.findElement(By.id("ua.fora.android.mtest:id/largeLabel"));
-        listelements.add(0, mainElemBottom);
-
-        for (int i=0 ; i<listelements.size(); i++) {
-            Assert.assertEquals(listelements.get(i).getText(),listItemsToCheck.get(i));
-        }
 
 
 
-        //Assert.assertTrue(pg.isElementPresent(mPgM.bottomBarMainBtn));
-
-    }
 }
