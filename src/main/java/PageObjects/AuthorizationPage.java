@@ -251,6 +251,8 @@ public class AuthorizationPage extends BasePageObject{
         logger.info("Клик кнопки пропустить");
         tapAndroidElement(skipAuthPageOwnCount);
 
+        pause(2000);
+
         logger.info("Клик чекбокса - мені є 18 років");
         tapAndroidElement(checkboc18Years);
 
@@ -276,6 +278,8 @@ public class AuthorizationPage extends BasePageObject{
 
         logger.info("Клик кнопки Далее - вход в главное старт меню приложения");
         tapAndroidElement(nextBtnAfterAuth);
+
+        pause(2000);
     }
 
 

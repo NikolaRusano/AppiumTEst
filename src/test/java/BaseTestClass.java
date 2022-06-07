@@ -21,7 +21,7 @@ public class BaseTestClass {
 
        DesiredCapabilities dcap = new DesiredCapabilities();
 
-        dcap.setCapability(MobileCapabilityType.DEVICE_NAME, "NickTestDevice");
+        dcap.setCapability(MobileCapabilityType.DEVICE_NAME, "TestDevice");
         dcap.setCapability(MobileCapabilityType.UDID, "emulator-5554");
         dcap.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android"); //platformName
         dcap.setCapability(MobileCapabilityType.PLATFORM_VERSION, "11.0"); //platformVersion
@@ -33,11 +33,11 @@ public class BaseTestClass {
         dcap.setCapability("appActivity", "ua.fora.android.ui.activity.SplashActivity");
         //dcap.setCapability("appActivity", "ua.fora.android.ui.activity.NexusLauncherActivity");
         dcap.setCapability("unicodeKeyboard", "true");
-        dcap.setCapability("skipUnlock", "false");
+        dcap.setCapability("skipUnlock", "true");
 
 
 
-        driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), dcap);
+        driver = new AndroidDriver(new URL("http://127.0.0.1:472/wd/hub"), dcap);
         return driver;
 
 
